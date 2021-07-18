@@ -12,3 +12,4 @@ insert_final_newline = false
 
 [README.md]
 trim_trailing_whitespace = false
+insert_final_newline = false
