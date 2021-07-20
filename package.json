@@ -2,8 +2,8 @@
   "name": "inwardmovement-todo",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
     "start": "rollup -c -w",
+    "build": "rollup -c",
     "serve": "sirv public --no-clear",
     "deploy": "netlify deploy --prod --dir public"
   },
