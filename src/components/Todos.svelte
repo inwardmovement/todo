@@ -2,7 +2,7 @@
   export let todos = []
 
   $: totalTodos = todos.length
-  let newTodoText = ''
+  let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
 
   function deleteTodo(todo) {
@@ -11,7 +11,7 @@
 
   function addTodo() {
     todos = [...todos, { id: newTodoId, text: newTodoText }]
-    newTodoText = ''
+    newTodoText = ""
   }
 </script>
 
