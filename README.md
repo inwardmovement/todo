@@ -1,4 +1,4 @@
-# Inwardmovement's Todo
+# Inwardmovement's Todo (not ready for release yet)
 A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmovement-todo.netlify.app/)
 
 ## Installation
