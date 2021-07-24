@@ -33,6 +33,7 @@
   }
 
   function onCancel() {
+    document.getElementById("newTodoInput").blur()
     newTodoText = ""
     focus = false
   }
