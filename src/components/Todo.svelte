@@ -6,7 +6,6 @@
 
   let editingTodo = false
   let editTodoText = todo.text
-  console.log('b 1 ' + editingTodo)
 
   function updateTodo(editedTodo) {
     todo = { ...todo, ...editedTodo }
@@ -16,13 +15,12 @@
   function onCancel() {
     editTodoText = todo.text
     editingTodo = false
-    console.log('b 2 ' + editingTodo)
+    dispatch('cancel', todo)
   }
 
   function onSave() {
     updateTodo({ text: editTodoText })
     editingTodo = false
-    console.log('b 3 ' + editingTodo)
   }
 
   function onDelete() {
@@ -32,7 +30,6 @@
   function onEdit() {
     editingTodo = true
     dispatch('editingTodo', todo)
-    console.log('b 4 ' + editingTodo)
   }
 </script>
 
