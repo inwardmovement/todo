@@ -7,11 +7,10 @@
   let editingNewTodo = false
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
-  let editingTodo = false
-  console.log('autofocus ON')
+  let autofocus = true
 
   function inputFocus(){
-    if (!editingTodo) {
+    if (autofocus) {
       document.getElementById("newTodoInput").focus()
     }
   }
@@ -29,8 +28,7 @@
   function updateTodos(todo) {
     const i = todos.findIndex(t => t.id === todo.id)
     todos[i] = { ...todos[i], ...todo }
-    editingTodo = false
-    console.log('autofocus ON')
+    autofocus = true
   }
 
   function onCancel() {
@@ -39,13 +37,11 @@
   }
 
   function onEditingTodo() {
-    editingTodo = true
-    console.log('autofocus OFF')
+    autofocus = false
   }
 
   function onCancelEditingTodo() {
-    editingTodo = false
-    console.log('autofocus ON')
+    autofocus = true
   }
 </script>
 
