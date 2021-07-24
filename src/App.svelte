@@ -1,5 +1,5 @@
 <script>
-  import Todos from "./components/Todos.svelte";
+  import Todos from "./components/Todos.svelte"
 
   let todos = [
     { id: 1, text: "task1" },

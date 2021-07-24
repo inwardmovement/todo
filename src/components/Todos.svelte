@@ -1,4 +1,6 @@
 <script>
+  import Todo from "./Todo.svelte"
+
   export let todos = []
 
   $: totalTodos = todos.length
@@ -9,18 +11,26 @@
     todos = todos.filter(t => t.id !== todo.id)
   }
 
-  function addTodo() {
+  function newTodo() {
     todos = [...todos, { id: newTodoId, text: newTodoText }]
     newTodoText = ""
+  }
+
+  function editTodo(todo) {
+    const i = todos.findIndex(t => t.id === todo.id)
+    todos[i] = { ...todos[i], ...todo }
   }
 </script>
 
 <ul>
   {#each todos as todo (todo.id)}
-    <li id="todo-{todo.id}" on:click={() => deleteTodo(todo)}>{todo.text}</li>
+    <Todo {todo}
+      on:delete={e => deleteTodo(e.detail)}
+      on:edit={e => editTodo(e.detail)}
+    />
   {/each}
 </ul>
 
-<form on:submit|preventDefault={addTodo}>
+<form on:submit|preventDefault={newTodo}>
   <input bind:value={newTodoText} type="text" id="newTodoInput" />
 </form>
