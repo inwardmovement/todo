@@ -4,7 +4,7 @@
   export let todos = []
 
   $: totalTodos = todos.length
-  let editingNewTodo = false
+  let focus = false
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
   let autofocus = true
@@ -12,6 +12,7 @@
   function inputFocus(){
     if (autofocus) {
       document.getElementById("newTodoInput").focus()
+      focus = true
     }
   }
   window.onkeydown = inputFocus
@@ -33,7 +34,7 @@
 
   function onCancel() {
     newTodoText = ""
-    editingNewTodo = false
+    focus = false
   }
 
   function onEditingTodo() {
@@ -57,5 +58,5 @@
 </ul>
 
 <form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && onCancel()}>
-  <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={onCancel} class:hidden={!editingNewTodo} />
+  <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={onCancel} class:hidden={!focus} />
 </form>
