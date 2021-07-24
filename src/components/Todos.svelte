@@ -7,12 +7,12 @@
   let editingNewTodo = false
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
+  let editingTodo = false
 
   function inputFocus(){
     if (!editingTodo) {
       editingNewTodo = true
       document.getElementById("newTodoInput").focus();
-      console.log(editingNewTodo)
     }
   }
   window.onkeydown = inputFocus
@@ -23,7 +23,7 @@
 
   function newTodo() {
     todos = [...todos, { id: newTodoId, text: newTodoText }]
-    newTodoText = ""
+    onCancel()
   }
 
   function editTodo(todo) {
@@ -34,7 +34,6 @@
   function onCancel() {
     newTodoText = ""
     editingNewTodo = false
-    console.log(editingNewTodo)
   }
 
   // function onFocusTodo() {
