@@ -65,3 +65,22 @@
 <form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && onCancel()}>
   <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={onCancel} class:hidden={!focus} />
 </form>
+
+<style lang="scss">
+  ul {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  #newTodoInput {
+    padding-left: .25rem;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .hidden {
+    background-color: transparent !important;
+    pointer-events: none;
+  }
+</style>
