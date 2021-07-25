@@ -1,7 +1,7 @@
-dnd
-mobile
-a11y
 reorg css
+dnd
+a11y
+mobile
 promo
 
 SortableJS config:
