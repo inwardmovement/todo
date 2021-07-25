@@ -2,6 +2,7 @@ reorg css
 dnd
 a11y
 mobile
+pwa
 promo
 
 SortableJS config:
@@ -9,8 +10,8 @@ SortableJS config:
 
   .sortable-fallback {
     display: none;
-    }
+  }
     
   .sortable-ghost {
     background-color: grey;
-    }
+  }
