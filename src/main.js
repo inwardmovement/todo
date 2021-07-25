@@ -1,7 +1,7 @@
-import App from './App.svelte';
+import Todos from './components/Todos.svelte';
 
-const app = new App({
+const todos = new Todos({
 	target: document.body
 });
 
-export default app;
+export default todos;
