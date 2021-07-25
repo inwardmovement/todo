@@ -486,6 +486,10 @@ li:hover .check-icon {
   visibility: visible;
 }
 
+li span {
+  display: inline-block;
+}
+
 input {
   width: 100%;
   padding-left: 2rem;
