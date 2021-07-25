@@ -1,11 +1,7 @@
 <script>
   import Todo from "./Todo.svelte"
 
-  export let todos = [
-    { id: 1, text: "task1" },
-    { id: 2, text: "task2" },
-    { id: 3, text: "task3" }
-  ]
+  export let todos = []
 
   $: totalTodos = todos.length
   let focus = false
