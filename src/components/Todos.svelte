@@ -7,46 +7,46 @@
     { id: 3, text: "task3" }
   ]
 
+  let autofocus = true
+  let onFocus = false
   $: totalTodos = todos.length
-  let focus = false
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
-  let autofocus = true
 
-  function inputFocus(){
+  function newTodoInputFocus(){
     if (autofocus) {
       document.getElementById("newTodoInput").focus()
-      focus = true
+      onFocus = true
     }
   }
-  window.onkeydown = inputFocus
+  window.onkeydown = newTodoInputFocus
+
+  function newTodo() {
+    todos = [...todos, { id: newTodoId, text: newTodoText }]
+    cancelNewTodo()
+  }
+
+  function cancelNewTodo() {
+    document.getElementById("newTodoInput").blur()
+    newTodoText = ""
+    onFocus = false
+  }
+
+  function editingTodo() {
+    autofocus = false
+  }
+
+  function cancelEdit() {
+    autofocus = true
+  }
 
   function deleteTodo(todo) {
     todos = todos.filter(t => t.id !== todo.id)
   }
 
-  function newTodo() {
-    todos = [...todos, { id: newTodoId, text: newTodoText }]
-    onCancel()
-  }
-
   function updateTodos(todo) {
     const i = todos.findIndex(t => t.id === todo.id)
     todos[i] = { ...todos[i], ...todo }
-    autofocus = true
-  }
-
-  function onCancel() {
-    document.getElementById("newTodoInput").blur()
-    newTodoText = ""
-    focus = false
-  }
-
-  function onEditingTodo() {
-    autofocus = false
-  }
-
-  function onCancelEditingTodo() {
     autofocus = true
   }
 </script>
@@ -55,15 +55,15 @@
   {#each todos as todo (todo.id)}
     <Todo {todo}
       on:delete={e => deleteTodo(e.detail)}
-      on:editingTodo={e => onEditingTodo(e.detail)}
-      on:cancel={e => onCancelEditingTodo(e.detail)}
+      on:editingTodo={e => editingTodo(e.detail)}
+      on:cancel={e => cancelEdit(e.detail)}
       on:update={e => updateTodos(e.detail)}
     />
   {/each}
 </ul>
 
-<form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && onCancel()}>
-  <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={onCancel} class:hidden={!focus} />
+<form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && cancelNewTodo()}>
+  <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!onFocus} />
 </form>
 
 <style lang="scss">
