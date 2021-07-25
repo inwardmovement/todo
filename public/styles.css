@@ -465,9 +465,7 @@ ul {
 }
 
 li {
-  position: relative;
   list-style-type: none;
-  padding-left: 2rem;
 }
 
 .separator:not(:last-child) {
@@ -478,11 +476,14 @@ li:hover {
   color: #198754;
 }
 
-li:hover::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: url("/check.svg");
+.check-icon {
+  visibility: hidden;
+  margin-left: .25rem;
+  margin-right: .25rem;
+}
+
+li:hover .check-icon {
+  visibility: visible;
 }
 
 input {
@@ -498,8 +499,6 @@ input {
   padding-left: .25rem;
   position: fixed;
   bottom: 0;
-  background-color: black;
-  color: white;
 }
 
 .hidden {

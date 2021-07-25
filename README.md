@@ -7,7 +7,7 @@ A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmov
 ## Usage
 1. (Recommended) Zoom and resize the window in a corner of your screen.
 2. Commands
-    - Write = new task
+    - Type = new task
     - Drag = reorder
     - Right click = edit
     - Click = delete

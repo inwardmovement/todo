@@ -1,3 +1,9 @@
+dnd
+mobile
+a11y
+reorg code
+promo
+
 SortableJS config:
   option forceFallback: true
 
