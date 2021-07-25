@@ -19,5 +19,11 @@ Not optimized for mobile, keyboard navigation, screen readers... but I will cons
 - I may not add new features, but I will consider suggestions.
 - Temporary list (no data storage).
 
+## Develop
+```
+npm install
+npm run dev
+```
+
 ## Prototype
 ![Prototype](PROTO.png)
