@@ -472,7 +472,8 @@ li {
   border-bottom: 1px solid #ced4da;
 }
 
-li:hover {
+li:hover,
+li:focus {
   color: #198754;
 }
 
@@ -482,7 +483,8 @@ li:hover {
   margin-right: .25rem;
 }
 
-li:hover .check-icon {
+li:hover .check-icon,
+li:focus .check-icon {
   visibility: visible;
 }
 
