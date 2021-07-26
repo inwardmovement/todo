@@ -2,6 +2,7 @@ dnd
 a11y
 mobile
 pwa
+paste list from clipboard
 promo
 
 SortableJS config:
