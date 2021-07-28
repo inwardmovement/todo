@@ -2,7 +2,8 @@ dnd
 a11y
 mobile
 pwa
-paste list from clipboard
+copy/paste list to/from clipboard
+modulariser
 promo
 
 SortableJS config:

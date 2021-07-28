@@ -9,13 +9,14 @@
 
   let autofocus = true
   let onFocus = false
+  let newTodoInput
   $: totalTodos = todos.length
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
 
   function newTodoInputFocus(){
     if (autofocus) {
-      document.getElementById("newTodoInput").focus()
+      newTodoInput.focus()
       onFocus = true
     }
   }
@@ -27,7 +28,7 @@
   }
 
   function cancelNewTodo() {
-    document.getElementById("newTodoInput").blur()
+    newTodoInput.blur()
     newTodoText = ""
     onFocus = false
   }
@@ -55,15 +56,15 @@
   {#each todos as todo (todo.id)}
     <Todo {todo}
       on:delete={e => deleteTodo(e.detail)}
-      on:editingTodo={e => editingTodo(e.detail)}
-      on:cancel={e => cancelEdit(e.detail)}
+      on:editingTodo={editingTodo}
+      on:cancel={cancelEdit}
       on:update={e => updateTodos(e.detail)}
     />
   {/each}
 </ul>
 
 <form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && cancelNewTodo()}>
-  <input bind:value={newTodoText} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!onFocus} />
+  <input bind:value={newTodoText} bind:this={newTodoInput} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!onFocus} />
 </form>
 
 <style lang="scss">
