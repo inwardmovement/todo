@@ -5,12 +5,12 @@ A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmov
 [Install with Chrome](https://support.google.com/chrome/answer/9658361)
 
 ## Usage
-1. (Recommended) Zoom and resize the window in a corner of your screen.
-2. Commands
-    - Type = new task
-    - Drag = reorder
-    - Right click = edit
-    - Click = delete
+(Recommended) Zoom and resize the window in a corner of your screen.  
+**Commands:**  
+- Click = delete
+- Right click = edit
+- Type = new task
+- Drag = reorder
 
 ![Usage](usage.png)
 
