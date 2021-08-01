@@ -20,14 +20,14 @@ npm install
 npm run dev
 ```
 
-## To do
-- Drag and drop
-- Copy/paste list to/from clipboard
-- Light/dark theme switcher
-- PWA
-- Improve accessibility: mobile, keyboard navigation, screen readers...
-- Promo
+## Caveats
+- Not optimized for mobile, keyboard navigation, screen readers...
 
 ## Scope
 - I may not add new features, but I will consider suggestions.
 - Temporary list (no data persistence).
+
+## To do
+- Drag and drop
+- PWA
+- Improve accessibility
