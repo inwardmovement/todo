@@ -1,6 +1,6 @@
 <script>
   import Todo from "./Todo.svelte"
-  import { autofocus } from '../stores.js'
+  import { autofocus } from '../stores/globalStore.js'
 
   export let todos
 
