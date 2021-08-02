@@ -1,21 +1,22 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-    const dispatch = createEventDispatcher()
+  import { autofocus } from '../stores.js'
 
   export let todo
 
+  const dispatch = createEventDispatcher()
   let editingTodo = false
   let editTodoText = todo.text
 
   function editTodo() {
     editingTodo = true
-    dispatch('editingTodo', todo)
+    $autofocus = false
   }
 
   function cancelEdit() {
     editTodoText = todo.text
     editingTodo = false
-    dispatch('cancel', todo)
+    $autofocus = true
   }
 
   function saveTodo() {

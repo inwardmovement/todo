@@ -1,5 +1,7 @@
 <script>
   import Todo from "./Todo.svelte"
+  import { autofocus } from '../stores.js'
+
 
   let todos = [
     { id: 1, text: "task1" },
@@ -7,20 +9,19 @@
     { id: 3, text: "task3" }
   ]
 
-  let autofocus = true
-  let onFocus = false
+  let newTodoInputFocused = false
   let newTodoInput
   $: totalTodos = todos.length
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
 
-  function newTodoInputFocus(){
-    if (autofocus) {
+  function focusNewTodoInput(){
+    if ($autofocus) {
       newTodoInput.focus()
-      onFocus = true
+      newTodoInputFocused = true
     }
   }
-  window.onkeydown = newTodoInputFocus
+  window.onkeydown = focusNewTodoInput
 
   function newTodo() {
     todos = [...todos, { id: newTodoId, text: newTodoText }]
@@ -30,15 +31,7 @@
   function cancelNewTodo() {
     newTodoInput.blur()
     newTodoText = ""
-    onFocus = false
-  }
-
-  function editingTodo() {
-    autofocus = false
-  }
-
-  function cancelEdit() {
-    autofocus = true
+    newTodoInputFocused = false
   }
 
   function deleteTodo(todo) {
@@ -48,7 +41,7 @@
   function updateTodos(todo) {
     const i = todos.findIndex(t => t.id === todo.id)
     todos[i] = { ...todos[i], ...todo }
-    autofocus = true
+    $autofocus = true
   }
 </script>
 
@@ -56,15 +49,13 @@
   {#each todos as todo (todo.id)}
     <Todo {todo}
       on:delete={e => deleteTodo(e.detail)}
-      on:editingTodo={editingTodo}
-      on:cancel={cancelEdit}
       on:update={e => updateTodos(e.detail)}
     />
   {/each}
 </ul>
 
 <form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && cancelNewTodo()}>
-  <input bind:value={newTodoText} bind:this={newTodoInput} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!onFocus} />
+  <input bind:value={newTodoText} bind:this={newTodoInput} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!newTodoInputFocused} />
 </form>
 
 <style lang="scss">
