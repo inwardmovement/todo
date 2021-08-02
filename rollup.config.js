@@ -49,8 +49,17 @@ export default {
          postcss: {
            plugins: [require('autoprefixer')()]
          }
-      })
-		}),
+        }),
+        // Warnings are normally passed straight to Rollup. You can
+        // optionally handle them here, for example to squelch
+        // warnings with a particular code
+        onwarn: (warning, handler) => {
+          if (warning.code === 'a11y-autofocus') return;
+
+          // let Rollup handle all other warnings normally
+          handler(warning);
+        },
+      }),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),

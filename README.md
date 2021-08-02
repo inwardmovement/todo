@@ -5,12 +5,7 @@ A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmov
 [Install with Chrome](https://support.google.com/chrome/answer/9658361)
 
 ## Usage
-(Recommended) Zoom and resize the window in a corner of your screen.  
-**Commands:**  
-- Click = delete
-- Right click = edit
-- Type = new task
-- Drag = reorder
+(Recommended) Zoom and resize the window in a corner of your screen.
 
 ![Usage](usage.png)
 
@@ -20,14 +15,9 @@ npm install
 npm run dev
 ```
 
-## Caveats
-- Not optimized for mobile, keyboard navigation, screen readers...
-
 ## Scope
-- I may not add new features, but I will consider suggestions.
-- Temporary list (no data persistence).
+Although I will consider suggestions and PRs, I made this app to suit my needs in terms of features and accessibility.
 
 ## To do
 - Drag and drop
 - PWA
-- Improve accessibility
