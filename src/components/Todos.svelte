@@ -2,11 +2,7 @@
   import Todo from "./Todo.svelte"
   import { autofocus } from '../stores.js'
 
-  let todos = [
-    { id: 1, text: "task1" },
-    { id: 2, text: "task2" },
-    { id: 3, text: "task3" }
-  ]
+  export let todos
 
   let newTodoInputFocused = false
   let newTodoInput
