@@ -86,8 +86,5 @@ export default {
 		// If we're building for production (npm run build
 		// instead of npm start), minify
 		production && terser()
-	],
-	watch: {
-		clearScreen: true
-	}
+	]
 };

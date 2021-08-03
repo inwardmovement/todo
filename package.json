@@ -6,7 +6,7 @@
     "deploy": "run-s _build _deploy",
     "_build": "rollup -c",
     "_deploy": "netlify deploy --prod --dir public",
-    "_serve": "sirv public --no-clear"
+    "_serve": "sirv public"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
