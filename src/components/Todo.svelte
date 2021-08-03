@@ -19,7 +19,7 @@
     $autofocus = true
   }
 
-  function saveTodo() {
+  function updateTodo() {
     todo = { ...todo, text: editTodoText }
     editingTodo = false
     dispatch('update', todo)
@@ -31,7 +31,7 @@
 </script>
 
 {#if editingTodo}
-  <form on:submit|preventDefault={saveTodo} on:keydown={e => e.key === 'Escape' && cancelEdit()}>
+  <form on:submit|preventDefault={updateTodo} on:keydown={e => e.key === 'Escape' && cancelEdit()}>
     <!-- svelte-ignore a11y-autofocus -->
     <input bind:value={editTodoText} type="text" id="todo-{todo.id}" autofocus onfocus="this.select()" autoComplete="off" on:blur={cancelEdit} />
   </form>
