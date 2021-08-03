@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { autofocus } from '../stores/globalStore.js'
+  import { autofocus } from '../store.js'
 
   export let todo
 
