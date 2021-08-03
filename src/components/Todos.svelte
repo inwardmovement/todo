@@ -1,13 +1,14 @@
 <script>
   import Todo from "./Todo.svelte"
   import { autofocus } from '../stores/globalStore.js'
-  import { todos } from '../stores/todosStore.js'
+
+  export let todos
 
   let newTodoInputFocused = false
   let newTodoInput
-  $: totalTodos = $todos.length
+  $: totalTodos = todos.length
   let newTodoText = ""
-  $: newTodoId = totalTodos ? Math.max(...$todos.map(t => t.id)) + 1 : 1
+  $: newTodoId = totalTodos ? Math.max(...todos.map(t => t.id)) + 1 : 1
 
   function focusNewTodoInput(){
     if ($autofocus) {
@@ -18,7 +19,7 @@
   window.onkeydown = focusNewTodoInput
 
   function newTodo() {
-    $todos = [...$todos, { id: newTodoId, text: newTodoText }]
+    todos = [...todos, { id: newTodoId, text: newTodoText }]
     cancelNewTodo()
   }
 
@@ -29,18 +30,18 @@
   }
 
   function deleteTodo(todo) {
-    $todos = $todos.filter(t => t.id !== todo.id)
+    todos = todos.filter(t => t.id !== todo.id)
   }
 
   function updateTodos(todo) {
-    const i = $todos.findIndex(t => t.id === todo.id)
-    $todos[i] = { ...$todos[i], ...todo }
+    const i = todos.findIndex(t => t.id === todo.id)
+    todos[i] = { ...todos[i], ...todo }
     $autofocus = true
   }
 </script>
 
 <ul>
-  {#each $todos as todo (todo.id)}
+  {#each todos as todo (todo.id)}
     <Todo {todo}
       on:delete={e => deleteTodo(e.detail)}
       on:update={e => updateTodos(e.detail)}
