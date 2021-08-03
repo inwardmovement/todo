@@ -21,3 +21,4 @@ Although I will consider suggestions and PRs, I made this app to suit my needs i
 ## To do
 - Drag and drop
 - PWA
+- Implement [custom stores](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_stores#implementing_our_custom_todos_store)
