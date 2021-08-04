@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rollup -c -w",
-    "deploy": "run-s _build _deploy",
+    "deploy": "run-s _build _generate-sw _deploy",
     "_build": "rollup -c",
     "_deploy": "netlify deploy --prod --dir public",
-    "_serve": "sirv public"
+    "_serve": "sirv public",
+    "_workbox-wizard": "workbox wizard",
+    "_generate-sw": "workbox generateSW workbox-config.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
@@ -23,6 +25,7 @@
     "sirv-cli": "^1.0.0",
     "sortablejs": "^1.14.0",
     "svelte": "^3.41.0",
-    "svelte-preprocess": "^4.7.4"
+    "svelte-preprocess": "^4.7.4",
+    "workbox-cli": "^6.1.5"
   }
 }
