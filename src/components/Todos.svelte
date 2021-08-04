@@ -2,12 +2,19 @@
   import Todo from "./Todo.svelte"
   import { autofocus } from '../store.js'
   import { todos } from '../store.js'
+  import sortable from 'sortablejs'
+  import { onMount } from 'svelte'
 
   let newTodoInputFocused = false
   let newTodoInput
+  let ul
   $: totalTodos = $todos.length
   let newTodoText = ""
   $: newTodoId = totalTodos ? Math.max(...$todos.map(t => t.id)) + 1 : 1
+
+  onMount(() => {
+    sortable.create(ul)
+  })
 
   function focusNewTodoInput(){
     if ($autofocus) {
@@ -39,7 +46,7 @@
   }
 </script>
 
-<ul>
+<ul bind:this={ul}>
   {#each $todos as todo (todo.id)}
     <Todo {todo}
       on:delete={e => deleteTodo(e.detail)}

@@ -17,4 +17,18 @@
     border: none;
     outline: none;
   }
+
+  .sortable-ghost {
+    background-color: #ced4da;
+  }
+
+  li:hover.sortable-ghost,
+  li:focus.sortable-ghost {
+    color: inherit !important;
+  }
+
+  li.sortable-ghost .check-icon,
+  li.sortable-ghost .check-icon {
+    visibility: hidden !important;
+  }
 </style>
