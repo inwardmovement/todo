@@ -1,5 +1,5 @@
 # Inwardmovement's Todo
-A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmovement-todo.netlify.app/)
+A minimalist to-do list desktop app: [inwardmovement-todo.netlify.app](https://inwardmovement-todo.netlify.app/)
 
 ## Usage
 [Install with Chrome](https://support.google.com/chrome/answer/9658361)  
