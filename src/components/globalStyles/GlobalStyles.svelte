@@ -9,10 +9,6 @@
     background-color: #f8f9fa;
   }
 
-  .grabbing * {
-    cursor: crosshair;
-  }
-
   input {
     width: 100%;
     padding-left: calc(.5rem + 16px);
@@ -23,14 +19,10 @@
   }
 
   .sortable-ghost {
-    background-color: #ced4da;
+    background-color: #e9ecef;
   }
 
   li:hover.sortable-ghost {
     color: inherit !important;
-  }
-
-  li.sortable-ghost .check-icon {
-    visibility: hidden !important;
   }
 </style>
