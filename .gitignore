@@ -1,2 +1,5 @@
 /node_modules/
 /public/build/
+/public/service-worker.js
+/public/service-worker.js.map
+/public/workbox-*

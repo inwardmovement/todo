@@ -4,7 +4,7 @@
   import sortable from 'sortablejs'
 
   let todos = [
-    {id: 1, text: "test"}
+    {id: 1, text: "test2"}
   ]
 
   let newTodoInputFocused = false
