@@ -18,4 +18,4 @@ Although I will consider suggestions and PRs, I made this app to suit my needs i
 
 ## To do
 - PWA
-- Refactor Sass
+- Remove rename

@@ -13,7 +13,11 @@
   $: newTodoId = totalTodos ? Math.max(...$todos.map(t => t.id)) + 1 : 1
 
   onMount(() => {
-    sortable.create(ul)
+    sortable.create(ul, {
+      onStart: function (evt) {
+        evt.dataTransfer.dropEffect = "none"
+      }
+    })
   })
 
   function focusNewTodoInput(){

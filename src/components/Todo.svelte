@@ -46,26 +46,23 @@
 <style lang="scss">
   li {
     list-style-type: none;
-    position: relative;
-  }
 
-  .separator {
-    border-bottom: 1px solid #ced4da;
-  }
+    &:hover {
+      color: #198754;
 
-  li:hover,
-  li:focus {
-    color: #198754;
-  }
+      .check-icon {
+        visibility: visible;
+      }
+    }
 
-  .check-icon {
-    visibility: hidden;
-    margin-left: .25rem;
-    margin-right: .25rem;
-  }
+    .check-icon {
+      visibility: hidden;
+      margin-left: .25rem;
+      margin-right: .25rem;
+    }
 
-  li:hover .check-icon,
-  li:focus .check-icon {
-    visibility: visible;
+    .separator {
+      border-bottom: 1px solid #ced4da;
+    }
   }
 </style>
