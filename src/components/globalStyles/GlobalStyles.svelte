@@ -16,6 +16,7 @@
     padding-bottom: 0;
     border: none;
     outline: none;
+    background-color: #f8f9fa;
   }
 
   .sortable-ghost {
