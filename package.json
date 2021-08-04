@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rollup -c -w",
+    "deploy": "run-s _build _generate-sw _deploy-netlify",
     "_build": "rollup -c",
     "_serve": "sirv public",
     "_generate-sw": "workbox generateSW workbox-config.js",
     "_deploy-netlify": "netlify deploy --prod --dir public",
-    "_workbox-wizard": "workbox wizard",
-    "_deploy": "run-s _build _generate-sw _deploy-netlify"
+    "_workbox-wizard": "workbox wizard"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
