@@ -15,6 +15,3 @@ npm run dev
 
 ## Scope
 Although I will consider suggestions and PRs, I made this app to suit my needs in terms of features and accessibility.
-
-## To do
-- PWA
