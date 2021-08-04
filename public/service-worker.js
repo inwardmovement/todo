@@ -1,4 +1,4 @@
-const CACHE_NAME = "inwardmovement-todo-v1";
+const CACHE_NAME = "inwardmovement-todo-v2";
 const assetToCache = [
   '/',
   '/index.html',
