@@ -19,10 +19,6 @@
   }
 
   .sortable-ghost {
-    background-color: #e9ecef;
-  }
-
-  li:hover.sortable-ghost {
-    color: inherit !important;
+    color: #f8f9fa !important;
   }
 </style>
