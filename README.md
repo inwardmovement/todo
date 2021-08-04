@@ -5,7 +5,7 @@ A minimalist to-do list app: [inwardmovement-todo.netlify.app](https://inwardmov
 [Install with Chrome](https://support.google.com/chrome/answer/9658361)  
 Zoom and resize the window in a corner of your screen
 
-![Usage](usage2.png)
+![Usage](usage.png)
 
 ## Develop
 ```
