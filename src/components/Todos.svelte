@@ -3,7 +3,9 @@
   import { onMount } from 'svelte'
   import sortable from 'sortablejs'
 
-  let todos = []
+  let todos = [
+    {id: 1, text: "test"}
+  ]
 
   let newTodoInputFocused = false
   let newTodoInput
