@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/build/bundle.css">
   <script defer src="/build/bundle.js"></script>
   <script>
-    if(window.location.href.indexOf("https://inwardmovement-todo.netlify.app/") > -1) {
+    if (window.location.href.indexOf("https://inwardmovement-todo.netlify.app/") > -1) {
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js');
