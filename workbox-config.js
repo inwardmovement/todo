@@ -7,5 +7,7 @@ module.exports = {
 		/^utm_/,
 		/^fbclid$/
 	],
-	swDest: 'public/service-worker.js'
-};
+	swDest: 'public/service-worker.js',
+  skipWaiting: true,
+  clientsClaim: true
+}

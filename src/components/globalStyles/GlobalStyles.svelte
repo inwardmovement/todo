@@ -6,7 +6,7 @@
     height: 100%;
     cursor: default;
     user-select: none;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa !important;
   }
 
   .sortable-ghost {
