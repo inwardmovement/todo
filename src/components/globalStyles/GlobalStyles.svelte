@@ -9,16 +9,6 @@
     background-color: #f8f9fa;
   }
 
-  input {
-    width: 100%;
-    padding-left: calc(.5rem + 16px);
-    padding-top: 0;
-    padding-bottom: 0;
-    border: none;
-    outline: none;
-    background-color: #f8f9fa;
-  }
-
   .sortable-ghost {
     color: #f8f9fa !important;
   }

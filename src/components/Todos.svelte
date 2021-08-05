@@ -61,6 +61,12 @@
     position: fixed;
     bottom: 0;
     padding-left: .25rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: #f8f9fa;
   }
 
   .hidden {
