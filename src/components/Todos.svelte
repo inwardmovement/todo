@@ -48,6 +48,7 @@
 
 <form on:submit|preventDefault={newTodo} on:keydown={e => e.key === 'Escape' && cancelNewTodo()}>
   <input bind:value={newTodoText} bind:this={newTodoInput} type="text" id="newTodoInput" autoComplete="off" on:blur={cancelNewTodo} class:hidden={!newTodoInputFocused} />
+  <div>{newTodoText}</div>
 </form>
 
 <style lang="scss">
@@ -66,6 +67,15 @@
     width: 100%;
     border: none;
     outline: none;
+    background-color: transparent;
+    color: transparent;
+    z-index: 99;
+  }
+
+  div {
+    position: fixed;
+    bottom: 0;
+    padding-left: .25rem;
     background-color: #f8f9fa;
   }
 
