@@ -7,5 +7,5 @@ module.exports = {
 		/^utm_/,
 		/^fbclid$/
 	],
-	swDest: 'public/service-worker.js'
+	swDest: 'public/build/service-worker.js'
 };

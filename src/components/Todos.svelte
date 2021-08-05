@@ -58,9 +58,9 @@
   }
 
   #newTodoInput {
-    padding-left: .25rem;
     position: fixed;
     bottom: 0;
+    padding-left: .25rem;
   }
 
   .hidden {
