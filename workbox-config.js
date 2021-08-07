@@ -8,6 +8,5 @@ module.exports = {
 		/^fbclid$/
 	],
 	swDest: 'public/service-worker.js',
-  skipWaiting: true,
   clientsClaim: true
 }
