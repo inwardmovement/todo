@@ -15,3 +15,6 @@ npm run dev
 
 ## Scope
 Although I will consider suggestions and PRs, I made this app to suit my needs in terms of features and accessibility.
+
+## To do
+- white background to input text line to hide underlying text while tapping.
