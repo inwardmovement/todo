@@ -18,3 +18,4 @@ Although I will consider suggestions and PRs, I made this app to suit my needs i
 
 ## To do
 - white background to input text line to hide underlying text while tapping.
+- image readme = no background + light/dark mode
