@@ -3,7 +3,7 @@ A minimalist to-do list desktop app: [inwardmovement-todo.netlify.app](https://i
 
 ## Usage
 [Install with Chrome](https://support.google.com/chrome/answer/9658361)  
-Zoom and resize the window in a corner of your screen
+You can zoom and resize the window in a corner of your screen
 
 ![Usage](usage.png)
 
