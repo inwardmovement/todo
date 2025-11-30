@@ -63,7 +63,7 @@
   #newTodoInput {
     position: fixed;
     bottom: 0;
-    padding-left: .25rem;
+    padding-left: .5rem;
     padding-top: 0;
     padding-bottom: 0;
     width: 100%;
@@ -77,7 +77,7 @@
   div {
     position: fixed;
     bottom: 0;
-    padding-left: .25rem;
+    padding-left: .5rem;
     background-color: #f8f9fa;
   }
 
