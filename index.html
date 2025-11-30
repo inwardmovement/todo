@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="repository" content="https://github.com/inwardmovement/todo" />
+    <link rel="manifest" href="app.webmanifest" />
+    <link rel="icon" type="image/png" href="/icons/icon-32.png" />
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <style>
+      /* RESET START */
+      *,
+      ::after,
+      ::before,
+      ::backdrop,
+      ::file-selector-button {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0 solid;
+      }
+
+      html,
+      :host {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+        font-family: --theme(
+          --default-font-family,
+          ui-sans-serif,
+          system-ui,
+          sans-serif,
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        );
+        font-feature-settings: --theme(--default-font-feature-settings, normal);
+        font-variation-settings: --theme(
+          --default-font-variation-settings,
+          normal
+        );
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      ol,
+      ul,
+      menu {
+        list-style: none;
+      }
+
+      button,
+      input,
+      select,
+      optgroup,
+      textarea,
+      ::file-selector-button {
+        font: inherit;
+        font-feature-settings: inherit;
+        font-variation-settings: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        border-radius: 0;
+        background-color: transparent;
+        opacity: 1;
+      }
+      /* RESET END */
+
+      body {
+        height: 100vh;
+        cursor: default;
+      }
+
+      ul {
+        padding-bottom: 24px;
+      }
+
+      li {
+        padding-left: 6px;
+        white-space: pre;
+      }
+
+      .space {
+        height: 12px;
+      }
+
+      input {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding-left: 6px;
+        background-color: white;
+        outline: none;
+        caret-color: transparent;
+        cursor: default;
+      }
+
+      .sortable-ghost {
+        color: #fff;
+      }
+    </style>
+    <script>
+      let todos = [];
+      let isDragging = false;
+
+      // Initialisation
+      document.addEventListener("DOMContentLoaded", () => {
+        input = document.getElementById("todoInput");
+        list = document.getElementById("todoList");
+        body = document.querySelector("body");
+
+        input.focus();
+
+        var sortable = Sortable.create(list, {
+          onStart: function () {
+            isDragging = true;
+            input.blur();
+          },
+          onEnd: function (evt) {
+            // Réorganiser le tableau todos en fonction du nouvel ordre
+            const movedItem = todos.splice(evt.oldIndex, 1)[0];
+            todos.splice(evt.newIndex, 0, movedItem);
+
+            // Double requestAnimationFrame pour s'assurer que tout est terminé
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                isDragging = false;
+                input.focus();
+              });
+            });
+          },
+        });
+
+        // Quand l'input perd le focus, le récupérer immédiatement
+        input.addEventListener("blur", () => {
+          if (!isDragging) {
+            setTimeout(() => input.focus(), 0);
+          }
+        });
+
+        // Quand la fenêtre devient active
+        window.addEventListener("focus", () => {
+          if (!isDragging) {
+            input.focus();
+          }
+        });
+
+        // Click n'importe où ramène le focus
+        body.onclick = () => {
+          if (!isDragging) {
+            input.focus();
+          }
+        };
+
+        // Ajouter un élément avec Enter
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            const value = input.value || " ";
+            addTodo(value);
+            input.value = "";
+            input.focus();
+          }
+        });
+
+        // Vider l'input avec Échap
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            input.value = "";
+            input.focus();
+          }
+        });
+      });
+
+      // Ajouter un todo
+      function addTodo(text) {
+        todos.push(text);
+        render();
+        input.focus();
+      }
+
+      // Supprimer un todo
+      function removeTodo(index) {
+        todos.splice(index, 1);
+        render();
+        input.focus();
+      }
+
+      // Render la liste
+      function render() {
+        list.innerHTML = "";
+        todos.forEach((todo, index) => {
+          const li = document.createElement("li");
+          li.textContent = todo;
+
+          // Ajouter la classe "space" si le contenu est un seul espace
+          if (todo === " ") {
+            li.classList.add("space");
+          }
+
+          // Click pour supprimer
+          li.addEventListener("click", () => {
+            removeTodo(index);
+          });
+
+          list.appendChild(li);
+        });
+      }
+    </script>
+    <title>Todo</title>
+  </head>
+  <body>
+    <ul id="todoList"></ul>
+    <input type="text" id="todoInput" autocomplete="off" />
+  </body>
+</html>
