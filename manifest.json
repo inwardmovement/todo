@@ -1,5 +1,5 @@
 {
-  "name": "Todo",
+  "name": "To-do",
   "icons": [
     {
       "src": "icons/icon-32.png",
@@ -18,7 +18,7 @@
     }
   ],
   "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#212529",
-  "background_color": "#f8f9fa"
+  "display": "fullscreen",
+  "theme_color": "black",
+  "background_color": "white"
 }
