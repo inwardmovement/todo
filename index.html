@@ -195,6 +195,22 @@
             input.focus();
           }
         });
+
+        // Copier la liste (Alt + C)
+        document.addEventListener("keydown", async (e) => {
+          if (e.altKey && e.key === "c") {
+            e.preventDefault();
+            await copyToClipboard();
+          }
+        });
+
+        // Coller la liste (Alt + V)
+        document.addEventListener("keydown", async (e) => {
+          if (e.altKey && e.key === "v") {
+            e.preventDefault();
+            await pasteFromClipboard();
+          }
+        });
       });
 
       // Ajouter un todo
@@ -230,6 +246,34 @@
 
           list.appendChild(li);
         });
+      }
+
+      // Copier la liste au format texte
+      async function copyToClipboard() {
+        const text = todos.map((todo) => (todo === " " ? "" : todo)).join("\n");
+
+        try {
+          await navigator.clipboard.writeText(text);
+          console.log("Liste copiée dans le presse-papier");
+        } catch (err) {
+          console.error("Erreur lors de la copie:", err);
+        }
+      }
+
+      // Coller la liste depuis le presse-papier
+      async function pasteFromClipboard() {
+        try {
+          const text = await navigator.clipboard.readText();
+          const lines = text.split("\n");
+
+          // Remplacer la liste existante
+          todos = lines.map((line) => (line === "" ? " " : line));
+
+          render();
+          console.log("Liste importée depuis le presse-papier");
+        } catch (err) {
+          console.error("Erreur lors du collage:", err);
+        }
       }
     </script>
     <title>To-do</title>
