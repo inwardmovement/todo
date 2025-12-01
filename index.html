@@ -66,9 +66,16 @@
       }
       /* RESET END */
 
+      :root {
+        --bg: black;
+        --fg: white;
+      }
+
       body {
         height: 100vh;
         cursor: default;
+        background-color: var(--bg);
+        color: var(--fg);
       }
 
       ul {
@@ -81,14 +88,14 @@
       }
 
       .space {
-        height: 12px;
+        height: 24px;
       }
 
       input {
         position: fixed;
         bottom: 0;
         padding-left: 6px;
-        background-color: white;
+        background-color: var(--bg);
         outline: none;
         caret-color: transparent;
         cursor: default;
@@ -96,7 +103,7 @@
       }
 
       .sortable-ghost {
-        color: #fff;
+        color: var(--bg);
       }
     </style>
     <script>
