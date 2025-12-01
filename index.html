@@ -270,7 +270,8 @@
           const lines = text.split("\n");
 
           // Remplacer la liste existante
-          todos = lines.map((line) => (line === "" ? " " : line));
+          // Transformer les lignes vides (ou contenant uniquement des espaces) en " "
+          todos = lines.map((line) => (line.trim() === "" ? " " : line));
 
           render();
           console.log("Liste importée depuis le presse-papier");
