@@ -214,6 +214,14 @@
             await pasteFromClipboard();
           }
         });
+
+        // Fermer la fenêtre avec le clic du milieu (molette)
+        document.addEventListener("auxclick", (e) => {
+          if (e.button === 1) {
+            e.preventDefault();
+            window.close();
+          }
+        });
       });
 
       // Ajouter un todo
