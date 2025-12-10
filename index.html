@@ -112,6 +112,80 @@
       let todos = [];
       let isDragging = false;
 
+      // Système d'historique pour undo/redo
+      const history = {
+        undoStack: [],
+        redoStack: [],
+      };
+
+      // Enregistrer une action dans l'historique
+      function recordAction(action) {
+        history.undoStack.push(action);
+        history.redoStack = [];
+      }
+
+      // Annuler la dernière action
+      function undo() {
+        if (history.undoStack.length === 0) return;
+
+        const action = history.undoStack.pop();
+        history.redoStack.push(action);
+
+        switch (action.type) {
+          case "ADD_TODO":
+            // Annuler un ajout = supprimer l'élément
+            todos.splice(action.index, 1);
+            break;
+          case "REMOVE_TODO":
+            // Annuler une suppression = remettre l'élément
+            todos.splice(action.index, 0, action.text);
+            break;
+          case "REORDER":
+            // Annuler un réordonnancement = revenir à l'ancienne position
+            const item = todos.splice(action.newIndex, 1)[0];
+            todos.splice(action.oldIndex, 0, item);
+            break;
+          case "REPLACE_ALL":
+            // Annuler un remplacement complet = restaurer l'ancienne liste
+            todos = [...action.previousTodos];
+            break;
+        }
+
+        render();
+        input.focus();
+      }
+
+      // Rétablir la dernière action annulée
+      function redo() {
+        if (history.redoStack.length === 0) return;
+
+        const action = history.redoStack.pop();
+        history.undoStack.push(action);
+
+        switch (action.type) {
+          case "ADD_TODO":
+            // Refaire un ajout = ajouter l'élément
+            todos.splice(action.index, 0, action.text);
+            break;
+          case "REMOVE_TODO":
+            // Refaire une suppression = supprimer l'élément
+            todos.splice(action.index, 1);
+            break;
+          case "REORDER":
+            // Refaire un réordonnancement = remettre à la nouvelle position
+            const item = todos.splice(action.oldIndex, 1)[0];
+            todos.splice(action.newIndex, 0, item);
+            break;
+          case "REPLACE_ALL":
+            // Refaire un remplacement complet = appliquer la nouvelle liste
+            todos = [...action.newTodos];
+            break;
+        }
+
+        render();
+        input.focus();
+      }
+
       // Initialisation
       document.addEventListener("DOMContentLoaded", () => {
         input = document.getElementById("todoInput");
@@ -129,6 +203,15 @@
             // Réorganiser le tableau todos en fonction du nouvel ordre
             const movedItem = todos.splice(evt.oldIndex, 1)[0];
             todos.splice(evt.newIndex, 0, movedItem);
+
+            // Enregistrer le réordonnancement dans l'historique
+            if (evt.oldIndex !== evt.newIndex) {
+              recordAction({
+                type: "REORDER",
+                oldIndex: evt.oldIndex,
+                newIndex: evt.newIndex,
+              });
+            }
 
             // Rendre à nouveau la liste pour mettre à jour les écouteurs d'événements
             render();
@@ -215,6 +298,22 @@
           }
         });
 
+        // Annuler (Ctrl + Z)
+        document.addEventListener("keydown", (e) => {
+          if (e.ctrlKey && e.key === "z") {
+            e.preventDefault();
+            undo();
+          }
+        });
+
+        // Rétablir (Ctrl + Y)
+        document.addEventListener("keydown", (e) => {
+          if (e.ctrlKey && e.key === "y") {
+            e.preventDefault();
+            redo();
+          }
+        });
+
         // Fermer la fenêtre avec le clic du milieu (molette)
         document.addEventListener("auxclick", (e) => {
           if (e.button === 1) {
@@ -226,14 +325,18 @@
 
       // Ajouter un todo
       function addTodo(text) {
+        const index = todos.length;
         todos.push(text);
+        recordAction({ type: "ADD_TODO", text, index });
         render();
         input.focus();
       }
 
       // Supprimer un todo
       function removeTodo(index) {
+        const text = todos[index];
         todos.splice(index, 1);
+        recordAction({ type: "REMOVE_TODO", text, index });
         render();
         input.focus();
       }
@@ -277,9 +380,19 @@
           const text = await navigator.clipboard.readText();
           const lines = text.split("\n");
 
+          // Sauvegarder l'ancienne liste pour l'historique
+          const previousTodos = [...todos];
+
           // Remplacer la liste existante
           // Transformer les lignes vides (ou contenant uniquement des espaces) en " "
           todos = lines.map((line) => (line.trim() === "" ? " " : line));
+
+          // Enregistrer dans l'historique
+          recordAction({
+            type: "REPLACE_ALL",
+            previousTodos,
+            newTodos: [...todos],
+          });
 
           render();
           console.log("Liste importée depuis le presse-papier");
