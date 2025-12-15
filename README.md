@@ -4,3 +4,4 @@ A minimalist to-do list PWA: [inwardmovement-todo.vercel.app](https://inwardmove
 
 ![Usage](usage.png)  
 `+ middle click = exit`
+`+ right click = rename`
