@@ -107,10 +107,19 @@
       .sortable-ghost {
         color: var(--bg);
       }
+
+      .edit-input {
+        position: static;
+        width: 100%;
+        padding-left: 0;
+        z-index: auto;
+      }
     </style>
     <script>
       let todos = [];
       let isDragging = false;
+      let isEditing = false;
+      let sortable = null;
 
       // Système d'historique pour undo/redo
       const history = {
@@ -149,6 +158,10 @@
             // Annuler un remplacement complet = restaurer l'ancienne liste
             todos = [...action.previousTodos];
             break;
+          case "RENAME_TODO":
+            // Annuler un renommage = remettre l'ancien texte
+            todos[action.index] = action.oldText;
+            break;
         }
 
         render();
@@ -180,6 +193,10 @@
             // Refaire un remplacement complet = appliquer la nouvelle liste
             todos = [...action.newTodos];
             break;
+          case "RENAME_TODO":
+            // Refaire un renommage = remettre le nouveau texte
+            todos[action.index] = action.newText;
+            break;
         }
 
         render();
@@ -194,7 +211,9 @@
 
         input.focus();
 
-        var sortable = Sortable.create(list, {
+        sortable = Sortable.create(list, {
+          filter: ".edit-input",
+          preventOnFilter: true,
           onStart: function () {
             isDragging = true;
             input.blur();
@@ -243,21 +262,21 @@
 
         // Quand l'input perd le focus, le récupérer immédiatement
         input.addEventListener("blur", () => {
-          if (!isDragging) {
+          if (!isDragging && !isEditing) {
             setTimeout(() => input.focus(), 0);
           }
         });
 
         // Quand la fenêtre devient active
         window.addEventListener("focus", () => {
-          if (!isDragging) {
+          if (!isDragging && !isEditing) {
             input.focus();
           }
         });
 
         // Click n'importe où ramène le focus
         body.onclick = () => {
-          if (!isDragging) {
+          if (!isDragging && !isEditing) {
             input.focus();
           }
         };
@@ -341,6 +360,74 @@
         input.focus();
       }
 
+      // Renommer un todo
+      function renameTodo(index, newText) {
+        const oldText = todos[index];
+        if (newText !== oldText) {
+          todos[index] = newText;
+          recordAction({ type: "RENAME_TODO", index, oldText, newText });
+        }
+        render();
+        input.focus();
+      }
+
+      // Activer le mode édition pour un todo
+      function startEditing(index, liElement) {
+        isEditing = true;
+        sortable.option("disabled", true);
+        const currentText = todos[index];
+
+        // Créer l'input d'édition
+        const editInput = document.createElement("input");
+        editInput.type = "text";
+        editInput.value = currentText === " " ? "" : currentText;
+        editInput.className = "edit-input";
+        editInput.autocomplete = "off";
+        editInput.spellcheck = false;
+
+        // Remplacer le li par l'input
+        liElement.textContent = "";
+        liElement.appendChild(editInput);
+
+        // Focus et sélectionner tout le texte
+        editInput.focus();
+        editInput.select();
+
+        // Empêcher les événements de propager (pour ne pas supprimer l'élément ou déclencher le drag)
+        editInput.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        editInput.addEventListener("mousedown", (e) => {
+          e.stopPropagation();
+        });
+
+        // Valider avec Entrée
+        editInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            isEditing = false;
+            sortable.option("disabled", false);
+            const newText = editInput.value || " ";
+            renameTodo(index, newText);
+          } else if (e.key === "Escape") {
+            // Annuler avec Échap
+            e.preventDefault();
+            isEditing = false;
+            sortable.option("disabled", false);
+            render();
+            input.focus();
+          }
+        });
+
+        // Annuler si on perd le focus
+        editInput.addEventListener("blur", () => {
+          isEditing = false;
+          sortable.option("disabled", false);
+          render();
+          input.focus();
+        });
+      }
+
       // Render la liste
       function render() {
         list.innerHTML = "";
@@ -353,9 +440,17 @@
             li.classList.add("space");
           }
 
-          // Click pour supprimer
-          li.addEventListener("click", () => {
-            removeTodo(index);
+          // Click pour supprimer (sauf en mode édition)
+          li.addEventListener("click", (e) => {
+            if (!isEditing) {
+              removeTodo(index);
+            }
+          });
+
+          // Clic droit pour renommer
+          li.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            startEditing(index, li);
           });
 
           list.appendChild(li);
@@ -405,6 +500,6 @@
   </head>
   <body>
     <ul id="todoList"></ul>
-    <input type="text" id="todoInput" autocomplete="off" />
+    <input type="text" id="todoInput" autocomplete="off" spellcheck="false" />
   </body>
 </html>
