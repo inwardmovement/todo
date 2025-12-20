@@ -6,7 +6,7 @@
 2. Install with browser
 <img width="173" height="91" alt="image" src="https://github.com/user-attachments/assets/23c57071-a08f-407f-9288-03e7f89d8614" />
 
-3. Resize the app in a corner of your screen
+3. Resize the app in a corner of your screen and zoom it around 200%
 <img width="469" height="289" alt="image" src="https://github.com/user-attachments/assets/cb9822e7-3950-49ad-90f1-6ce12734b747" />
 
 4. Enjoy!
