@@ -10,4 +10,4 @@
 <img width="469" height="289" alt="image" src="https://github.com/user-attachments/assets/cb9822e7-3950-49ad-90f1-6ce12734b747" />
 
 4. Enjoy!
-<img width="1600" height="1043" alt="Untitled scene" src="https://github.com/user-attachments/assets/31bccdff-010b-45dc-aaf2-d719704165fa" />
+<img width="1647" height="1043" alt="image" src="https://github.com/user-attachments/assets/f73dccf0-5e84-43ce-a359-53ebc1b2d45c" />
