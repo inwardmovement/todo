@@ -98,10 +98,13 @@
         padding-left: 6px;
         background-color: var(--bg);
         outline: none;
-        /* caret-color: transparent; */
         cursor: default;
         z-index: -1;
         text-wrap: wrap;
+      }
+
+      input.empty {
+        caret-color: transparent;
       }
 
       .sortable-ghost {
@@ -245,12 +248,14 @@
           },
         });
 
-        // Ajuster le z-index en fonction du contenu de l'input
+        // Ajuster le z-index et le caret en fonction du contenu de l'input
         function updateInputZIndex() {
           if (input.value !== "") {
             input.style.zIndex = "0";
+            input.classList.remove("empty");
           } else {
             input.style.zIndex = "-1";
+            input.classList.add("empty");
           }
         }
 
