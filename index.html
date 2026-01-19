@@ -309,7 +309,7 @@
 
         // Copier la liste (Alt + C)
         document.addEventListener("keydown", async (e) => {
-          if (e.altKey && e.key === "c") {
+          if (e.altKey && e.key.toLowerCase() === "c") {
             e.preventDefault();
             await copyToClipboard();
           }
@@ -317,7 +317,7 @@
 
         // Coller la liste (Alt + V)
         document.addEventListener("keydown", async (e) => {
-          if (e.altKey && e.key === "v") {
+          if (e.altKey && e.key.toLowerCase() === "v") {
             e.preventDefault();
             await pasteFromClipboard();
           }
