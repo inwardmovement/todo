@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -465,7 +465,7 @@
 
       // Copier la liste au format texte
       async function copyToClipboard() {
-        const text = todos.map((todo) => (todo === " " ? "" : todo)).join("\n");
+        const text = todos.map((todo) => (todo === " " ? "" : todo)).join(" ");
 
         try {
           await navigator.clipboard.writeText(text);
@@ -479,7 +479,7 @@
       async function pasteFromClipboard() {
         try {
           const text = await navigator.clipboard.readText();
-          const lines = text.split("\n");
+          const lines = text.split(" ");
 
           // Sauvegarder l'ancienne liste pour l'historique
           const previousTodos = [...todos];
